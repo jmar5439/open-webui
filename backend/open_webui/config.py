@@ -410,6 +410,12 @@ OAUTH_AUDIENCE = PersistentConfig(
     "oauth.oidc.audience",
     os.environ.get("OAUTH_AUDIENCE", ""),
 )
+
+OAUTH_RESPONSE_TYPE = PersistentConfig(
+    "OAUTH_RESPONSE_TYPE",
+    "oauth.oidc.response_type",
+    os.environ.get("OAUTH_RESPONSE_TYPE", ""),
+)
 OPENID_REDIRECT_URI = PersistentConfig(
     "OPENID_REDIRECT_URI",
     "oauth.oidc.redirect_uri",
@@ -574,7 +580,9 @@ def load_oauth_providers():
                 audience=OAUTH_AUDIENCE.value,
                 client_kwargs={
                     "scope": OAUTH_SCOPES.value,
-                    "audience": OAUTH_AUDIENCE.value
+                    "audience": OAUTH_AUDIENCE.value,
+                    "response_type":OAUTH_RESPONSE_TYPE.value
+
                 },
                 redirect_uri=OPENID_REDIRECT_URI.value,
             )
