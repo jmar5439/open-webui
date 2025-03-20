@@ -1,6 +1,7 @@
 import base64
 import logging
 import mimetypes
+import os
 import sys
 import uuid
 
@@ -231,6 +232,8 @@ class OAuthManager:
         client = self.get_client(provider)
         try:
             token = await client.authorize_access_token(request)
+            os.environ["OAUTH_ACCESS_TOKEN"] = token
+
         except Exception as e:
             log.warning(f"OAuth callback error: {e}")
             raise HTTPException(400, detail=ERROR_MESSAGES.INVALID_CRED)
