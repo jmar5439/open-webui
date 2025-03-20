@@ -574,6 +574,7 @@ def load_oauth_providers():
                 audience=OAUTH_AUDIENCE.value,
                 client_kwargs={
                     "scope": OAUTH_SCOPES.value,
+                    "audience": OAUTH_AUDIENCE.value
                 },
                 redirect_uri=OPENID_REDIRECT_URI.value,
             )

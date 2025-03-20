@@ -75,7 +75,6 @@ class OAuthManager:
         self.oauth = OAuth()
         self.app = app
         for _, provider_config in OAUTH_PROVIDERS.items():
-            provider_config["client_kwargs"]['audience'] = OAUTH_AUDIENCE.value
             provider_config["register"](self.oauth)
 
     def get_client(self, provider_name):
