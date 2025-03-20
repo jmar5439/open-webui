@@ -232,7 +232,7 @@ class OAuthManager:
         client = self.get_client(provider)
         try:
             token = await client.authorize_access_token(request)
-            os.environ["OAUTH_ACCESS_TOKEN"] = token
+            os.environ["OAUTH_ACCESS_TOKEN"] = token.get("access_token")
 
         except Exception as e:
             log.warning(f"OAuth callback error: {e}")
