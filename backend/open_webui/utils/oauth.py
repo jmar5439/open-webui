@@ -19,6 +19,7 @@ from open_webui.models.groups import Groups, GroupModel, GroupUpdateForm
 from open_webui.config import (
     DEFAULT_USER_ROLE,
     ENABLE_OAUTH_SIGNUP,
+    OAUTH_AUDIENCE,
     OAUTH_MERGE_ACCOUNTS_BY_EMAIL,
     OAUTH_PROVIDERS,
     ENABLE_OAUTH_ROLE_MANAGEMENT,
@@ -229,7 +230,7 @@ class OAuthManager:
             raise HTTPException(404)
         client = self.get_client(provider)
         try:
-            token = await client.authorize_access_token(request)
+            token = await client.authorize_access_token(request,audience=OAUTH_AUDIENCE.value)
         except Exception as e:
             log.warning(f"OAuth callback error: {e}")
             raise HTTPException(400, detail=ERROR_MESSAGES.INVALID_CRED)

@@ -405,6 +405,11 @@ OPENID_PROVIDER_URL = PersistentConfig(
     os.environ.get("OPENID_PROVIDER_URL", ""),
 )
 
+OAUTH_AUDIENCE = PersistentConfig(
+    "OAUTH_AUDIENCE",
+    "oauth.oidc.audience",
+    os.environ.get("OAUTH_AUDIENCE", ""),
+)
 OPENID_REDIRECT_URI = PersistentConfig(
     "OPENID_REDIRECT_URI",
     "oauth.oidc.redirect_uri",
@@ -566,6 +571,7 @@ def load_oauth_providers():
                 client_id=OAUTH_CLIENT_ID.value,
                 client_secret=OAUTH_CLIENT_SECRET.value,
                 server_metadata_url=OPENID_PROVIDER_URL.value,
+                audience=OAUTH_AUDIENCE.value,
                 client_kwargs={
                     "scope": OAUTH_SCOPES.value,
                 },
