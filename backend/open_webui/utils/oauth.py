@@ -75,6 +75,7 @@ class OAuthManager:
         self.oauth = OAuth()
         self.app = app
         for _, provider_config in OAUTH_PROVIDERS.items():
+            provider_config["client_kwargs"]['audience'] = OAUTH_AUDIENCE.value
             provider_config["register"](self.oauth)
 
     def get_client(self, provider_name):
@@ -230,7 +231,7 @@ class OAuthManager:
             raise HTTPException(404)
         client = self.get_client(provider)
         try:
-            token = await client.authorize_access_token(request,audience=OAUTH_AUDIENCE.value)
+            token = await client.authorize_access_token(request)
         except Exception as e:
             log.warning(f"OAuth callback error: {e}")
             raise HTTPException(400, detail=ERROR_MESSAGES.INVALID_CRED)
