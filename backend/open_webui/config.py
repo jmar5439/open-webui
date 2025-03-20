@@ -577,11 +577,10 @@ def load_oauth_providers():
                 client_id=OAUTH_CLIENT_ID.value,
                 client_secret=OAUTH_CLIENT_SECRET.value,
                 server_metadata_url=OPENID_PROVIDER_URL.value,
-                audience=OAUTH_AUDIENCE.value,
                 client_kwargs={
                     "scope": OAUTH_SCOPES.value,
                     "audience": OAUTH_AUDIENCE.value,
-                    "response_type":OAUTH_RESPONSE_TYPE.value
+                    "response_type": OAUTH_RESPONSE_TYPE.value
 
                 },
                 redirect_uri=OPENID_REDIRECT_URI.value,
